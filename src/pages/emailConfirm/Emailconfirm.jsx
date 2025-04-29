@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import Lottieanimation from "../../components/Lottieanimation";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { AiFillCheckCircle } from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
 
 const RESEND_DELAY_SECONDS = 60; // Define the cooldown period in seconds
 
