@@ -1,0 +1,156 @@
+.reg_container {
+  max-width: 100%;
+  height: 100vh;
+  /* overflow: hidden; */
+  background: var(--bg-linear-color);
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.bg {
+  flex: 1;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  border-radius: 0;
+  background-repeat: no-repeat;
+  z-index: 3;
+  background-size: 100%;
+  background-position: center -200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.illustrator2 {
+  flex: 1;
+  height: 100vh;
+  width: 100%;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: #ffffff74;
+  backdrop-filter: blur(100px);
+}
+
+.reg_box {
+  clear: both;
+  margin: 0 50px;
+  width: 80%;
+  max-width: 500px;
+  height: auto;
+  padding: 25px;
+}
+
+.reg_box h4 {
+  font-size: 15px;
+  color: #fff;
+  text-transform: capitalize;
+  padding: 10px 0;
+}
+
+.inputs .icon2 {
+  position: absolute;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  right: 10px;
+  width: 50px;
+  transition: all 400ms ease;
+}
+
+.icond {
+  color: #000;
+  font-size: 20px;
+  transition: all 400ms ease;
+  /* background: #464646; */
+}
+
+.reg_text h1 {
+  font-size: 30px;
+  text-transform: uppercase;
+  font-family: "Intro";
+  color: #ffffff;
+}
+
+.btn-primary {
+  width: 98%;
+  height: 20px;
+  padding: 20px;
+  background: #000;
+  font-size: 15px;
+  line-height: 1px;
+  border-radius: 10px;
+  border-style: none;
+  color: #fff;
+  font-weight: 600;
+  transition: all 400ms ease;
+  cursor: pointer;
+  /* transition: all 400ms 1s ease-in; */
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #ffffff62;
+  box-shadow: 1px 1px 4px 1px #187938, -1px -1px 4px 1px #004f1d96;
+  margin: 1rem 2px;
+}
+.btn-primary:hover {
+  background: var(--bg-linear-color);
+  box-shadow: 2px 3px 4px #000;
+  color: #fff;
+}
+
+.err {
+  color: red;
+  font-size: 500;
+  font-family: sans-serif;
+  font-size: 15px;
+  text-align: right;
+  padding: 5px;
+  transition: all 400ms ease;
+}
+
+.sucs {
+  color: rgb(14, 233, 14);
+  font-size: 12px;
+  text-align: right;
+  font-weight: 800;
+}
+
+.err > .input-w {
+  border: 2px solid red;
+}
+
+/* --------------------responsiveness-------------------- */
+@media (max-width: 768px) {
+  .reg_container {
+    flex-direction: column;
+  }
+  .bg {
+    height: 50vh;
+    background-position: center -100px;
+  }
+  .illustrator2 {
+    display: none;
+  }
+  .reg_box {
+    margin: 0 auto;
+    width: 90%;
+    max-width: 500px;
+    height: auto;
+    padding: 25px;
+  }
+}
+@media (max-width: 480px) {
+  .reg_box {
+    margin: 0 auto;
+    width: 90%;
+    max-width: 500px;
+    height: auto;
+    padding: 25px;
+  }
+}
