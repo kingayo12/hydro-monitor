@@ -1324,3 +1324,15 @@ button.nt-insel {
 .mt-2 {
   margin-top: 1rem !important;
 }
+
+.name {
+  position: fixed;
+  top: 100px;
+  padding: 5px;
+  text-align: center;
+  width: 100px;
+  margin: 0;
+  font-size: 12px;
+  margin-top: 10px;
+  color: #fff;
+}

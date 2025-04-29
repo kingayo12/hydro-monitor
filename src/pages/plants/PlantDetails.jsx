@@ -20,7 +20,7 @@ const PlantDetail = () => {
   useEffect(() => {
     const fetchPlantDetails = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/plants/${id}`);
+        const res = await axios.get(`https://hydromonitor.onrender.com/api/plants/${id}`);
         setPlant(res.data);
         setIsLoading(false);
       } catch (error) {

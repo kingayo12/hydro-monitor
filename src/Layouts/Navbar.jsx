@@ -7,52 +7,52 @@ import { FaPlus } from "react-icons/fa";
 import usr from "/src/assets/img/adewumi.png";
 import Profilelink from "../components/Profilelink";
 import YardOutlinedIcon from "@mui/icons-material/YardOutlined";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [dashboardTitle, setDashboardTitle] = useState("welcome");
   const [isuser, setUser] = useState(false);
+  const [showUser, setShowUser] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+  const auth = getAuth();
 
   useEffect(() => {
-    // Update the dashboard title based on the current location
-    if (location.pathname === "/dashboard") {
-      setDashboardTitle("Dashboard");
-    } else if (location.pathname === "/ticket") {
-      setDashboardTitle("Ticket");
-    } else if (location.pathname === "/chat") {
-      setDashboardTitle("Chat");
-    } else if (location.pathname === "/newticket") {
-      setDashboardTitle("NewTicket");
-    } else if (location.pathname === "/soilphlevel") {
-      setDashboardTitle("Soil PHLevel");
-    } else if (location.pathname === "/Userprofile") {
-      setDashboardTitle("UserProfile");
-    } else if (location.pathname === "./Settings") {
-      setDashboardTitle("Settings");
-    } else if (location.pathname === "./Theme") {
-      setDashboardTitle("Theme");
-    } else if (location.pathname === "./Help") {
-      setDashboardTitle("Help");
-    } else if (location.pathname === "./history") {
-      setDashboardTitle("History");
-    } else if (location.pathname === "./About") {
-      setDashboardTitle("About");
-    } else if (location.pathname === "/") {
-      setDashboardTitle("Logout");
-    } else if (location.pathname === "/humidity") {
-      setDashboardTitle("Humidity");
-    } else if (location.pathname === "/nutrientlevel") {
-      setDashboardTitle("Nutrient Level");
-    } else if (location.pathname === "/plants") {
-      setDashboardTitle("Plants");
-    } else if (location.pathname.startsWith("/plants/")) {
-      setDashboardTitle("Plant Details");
-    }
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      if (!currentUser) navigate("/");
+    });
+
+    return () => unsubscribe();
+  }, [auth, navigate]);
+
+  useEffect(() => {
+    const path = location.pathname;
+    const routeMap = {
+      "/dashboard": "Dashboard",
+      "/ticket": "Ticket",
+      "/chat": "Chat",
+      "/newticket": "New Ticket",
+      "/soilphlevel": "Soil PH Level",
+      "/Userprofile": "User Profile",
+      "/Settings": "Settings",
+      "/Theme": "Theme",
+      "/Help": "Help",
+      "/history": "History",
+      "/About": "About",
+      "/": "Logout",
+      "/humidity": "Humidity",
+      "/nutrientlevel": "Nutrient Level",
+      "/plants": "Plants",
+    };
+
+    setDashboardTitle(path.startsWith("/plants/") ? "Plant Details" : routeMap[path] || "Welcome");
   }, [location]);
 
   const handleUserClick = () => {
-    setUser((previous) => !previous);
+    setShowUser((previous) => !previous);
   };
 
   const handleDashboardTitleUpdate = (title) => {
@@ -62,12 +62,25 @@ const Navbar = () => {
   return (
     <div className='black-transaparent h-full flex'>
       <div className='nav-options'>
-        <div className='user-pics'>
+        <div className='user-pics '>
           <button className='profile-user' onClick={handleUserClick}>
             {/* {usr} */}
-            <img src={usr} alt='' />
+            {usr ? (
+              <div className='user-initials  text-bolder text-[var(--primary-color)] text-xl'>
+                {isuser?.displayName
+                  ? isuser.displayName
+                      .split(" ")
+                      .map((name) => name[0])
+                      .join("")
+                      .toUpperCase()
+                  : "U"}
+              </div>
+            ) : (
+              <img src='' alt='User' className='user-image' />
+            )}
+
             <AnimatePresence>
-              {isuser && (
+              {showUser && (
                 <motion.div
                   className='opt fixed'
                   initial={{ opacity: 0, x: -100 }}
